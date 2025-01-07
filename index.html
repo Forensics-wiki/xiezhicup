@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>獬豸杯电子数据取证竞赛</title>
+    <meta name="description" content="獬豸杯电子数据取证竞赛官方网站">
+    <meta name="keywords" content="电子取证, 獬豸杯, forensics">
+    <link rel="icon" href="favicon.ico">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0a192f;
+            color: #ccd6f6;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: #64ffda;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #4affd0;
+        }
+
+        img {
+            max-width: 50%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: rgba(10, 25, 47, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.7rem;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #ccd6f6;
+        }
+
+        header h1 span {
+            color: #64ffda;
+
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav ul li:first-child {
+            margin-left: 0;
+        }
+
+        nav ul li a {
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: inline-block;
+            color: #ccd6f6;
+            position: relative;
+            transition: color 0.3s ease;
+            padding-bottom: 3px;
+
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #64ffda;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        nav ul li a:hover {
+            color: #4affd0;
+        }
+
+        .banner {
+            text-align: center;
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(100, 255, 218, 0.1), transparent);
+            z-index: 1;
+
+        }
+
+        .banner::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(100, 255, 218, 0.05), transparent 60%);
+            z-index: 1;
+
+        }
+
+        .banner .container {
+            position: relative;
+            z-index: 2;
+
+        }
+
+
+        .banner h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+        }
+
+        .banner p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #a8b2d1;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: transparent;
+            color: #64ffda;
+            border: 2px solid #64ffda;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background-color: #64ffda;
+            color: #0a192f;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 3rem;
+            letter-spacing: 1px;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+            margin-top: 5rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            margin-left: -1px;
+            background-color: #4a5568;
+            z-index: 0;
+
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .prizes {
+            padding: 5rem 0;
+        }
+
+        .prize-level {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .prize-level h3 {
+            font-size: 1.7rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .prize-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            width: 50%;
+            margin: auto;
+        }
+
+        .prize-item {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid #334756;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        }
+
+        .prize-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .prize-item img {
+            width: 70px;
+            margin-bottom: 1rem;
+            position: absolute;
+        }
+
+        .prize-item h4 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .prize-item p {
+            font-size: 1rem;
+            color: #a8b2d1;
+        }
+
+        .organizers {
+            padding: 5rem 0;
+        }
+
+        .organizer-group {
+            margin-bottom: 3rem;
+            text-align: center;
+
+        }
+
+        .organizer-group h3 {
+            font-size: 1.7rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .organizer-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .organizer-logos img {
+            max-width: 150px;
+            height: auto;
+            filter: grayscale(0%);
+
+        }
+
+        .organizer-logos img:hover {
+            filter: grayscale(0%);
+
+        }
+
+
+        .contact {
+            background-color: #112240;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .contact h3 {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+
+        }
+
+        .contact p {
+            margin-bottom: 1.5rem;
+            color: #a8b2d1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            font-size: 0.9rem;
+            color: #a8b2d1;
+        }
+
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            nav ul li {
+                margin-left: 1rem;
+            }
+
+            nav ul li a {
+                font-size: 1rem;
+            }
+
+            .banner h2 {
+                font-size: 2.5rem;
+            }
+
+            .banner p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+        }
+
+        .info-box {
+            border: 2px solid #4a5568;
+            /* 设置边框颜色和宽度 */
+            padding: 20px;
+            /* 内边距，使内容与边框之间有空间 */
+            background-color: #1e2a3a;
+            /* 背景颜色，可选 */
+            border-radius: 8px;
+            /* 边框圆角，可选 */
+            margin-top: 20px;
+            /* 上边距，与标题保持一定距离 */
+            margin-bottom: 20px;
+            /* 下边距，与后续内容保持一定距离 */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1><span>獬豸杯</span>电子数据取证竞赛</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#about">比赛介绍</a></li>
+                    <li><a href="#timeline">比赛时间</a></li>
+                    <li><a href="#prizes">奖项设置</a></li>
+                    <li><a href="#organizers">主办机构</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="banner">
+        <div class="container">
+            <img src="logo.png" style="display: block; margin: 0 auto; width: 300px; height: auto;">
+            <h2>第二届 <span>獬豸杯</span> 电子数据取证竞赛</h2>
+            <br>
+            <a href="https://2025.xzcup.cn" class="btn">立即报名</a>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2 class="section-title">比赛介绍</h2>
+        <div class="prize-item">
+            <p>獬豸杯电子数据取证竞赛旨在提高电子数据取证从业人员的技能水平，促进电子数据取证技术创新，培养电子数据取证专业人才，推动电子数据取证事业发展。所有参赛人员须拥有中国国籍（不含港澳台地区）。<b>比赛形式为个人赛，参赛者需要自备工具</b></p>
+        </div>
+    </section>
+
+    <section id="timeline">
+        <h2 class="section-title">比赛时间</h2>
+        <div class="time-img">
+            <img src="time.png" style="display: block; margin: 0 auto;">
+        </div>
+    </section>
+
+
+    <section id="prizes" class="prizes container">
+        <h2 class="section-title">奖项设置</h2>
+        <div class="prize-level">
+            <div class="prize-grid">
+                <div class="prize-item">
+                    <img src="1.webp" alt="奖杯图标">
+                    <h4>一等奖</h4>
+                    <p>奖金：0元</p>
+                </div>
+            </div>
+        </div>
+        <div class="prize-level">
+            <div class="prize-grid">
+                <div class="prize-item">
+                    <img src="2.webp" alt="奖杯图标">
+                    <h4>二等奖</h4>
+                    <p>奖金：0元</p>
+                </div>
+            </div>
+        </div>
+        <div class="prize-level">
+            <div class="prize-grid">
+                <div class="prize-item">
+                    <img src="3.webp" alt="奖杯图标">
+                    <h4>三等奖</h4>
+                    <p>奖金：0元</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="organizers" class="organizers container">
+        <h2 class="section-title">主办机构</h2>
+        <div class="organizer-group">
+            <h3>主办</h3>
+            <div class="organizer-logos">
+                <img src="zb/1.png" alt="主办单位1">
+                <img src="zb/2.png" alt="主办单位2">
+                <img src="zb/3.png" alt="主办单位2">
+            </div>
+        </div>
+        <div class="organizer-group">
+            <h3>技术支持</h3>
+            <div class="organizer-logos">
+                <img src="https://dummyimage.com/150x80/ffffff/000&text=Tech+Support+2" alt="技术支持2">
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="contact">
+        <div class="container">
+            <h3>联系方式</h3>
+            <p>QQ一群：955391766</p>
+            <p>QQ二群：901185119</p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2025 獬豸杯电子数据取证竞赛</p>
+    </footer>
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
