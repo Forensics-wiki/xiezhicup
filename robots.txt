@@ -1,0 +1,7 @@
+User-agent: SB Script Kiddie  
+Disallow: /awvs  
+Disallow: /nessus  
+Disallow: /sqlmap  
+Disallow: /hacker  
+Disallow: /nexpose  
+Disallow: /sb  

@@ -1,486 +1,234 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>獬豸杯电子数据取证竞赛</title>
-    <meta name="description" content="獬豸杯电子数据取证竞赛官方网站">
-    <meta name="keywords" content="电子取证, 獬豸杯, forensics">
-    <link rel="icon" href="favicon.ico">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=0.29,maximum-scale=1">
+    <meta name="description" content="第二届獬豸杯电子数据取证竞赛>
+    <meta name="keywords" content="第二届獬豸杯电子数据取证竞赛">
+    <title>第二届獬豸杯电子数据取证竞赛</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel="stylesheet" href="css/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="css/com_mask.css">
+    <link rel="stylesheet" href="css/2024xzb.css">
+    <link rel="stylesheet" href="css/element-ui.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #0a192f;
-            color: #ccd6f6;
-            line-height: 1.6;
-            overflow-x: hidden;
+        .masker_content .disclaimer a,
+        .masker_content .gologin a,
+        .masker_content .reapcode,
+        .masker_content .back_login a,
+        .masker_content .tab .active,
+        .theme_color .el-checkbox__input.is-checked+.el-checkbox__label {
+            color: #1465ac !important;
         }
-
-        a {
-            color: #64ffda;
-            text-decoration: none;
-            transition: color 0.3s ease;
+        .masker_content .el-form .el-button,
+        .masker_content .tab .active::after,
+        .theme_color .maskCon .title,
+        .yzm_masker .btn_bg_red,
+        .theme_color .el-button--primary,
+        .right_btn .logout p,
+        .theme_color .is-checked .el-checkbox__inner {
+            background: #1465ac !important;
         }
-
-        a:hover {
-            color: #4affd0;
+        .masker_content .reapcode,
+        .theme_color .maskCon,
+        .theme_color .is-focus .el-checkbox__inner,
+        .theme_color .is-checked .el-checkbox__inner,
+        .theme_color .el-checkbox__inner:hover {
+            border-color: #1465ac !important;
         }
-
-        img {
-            max-width: 50%;
-            height: auto;
-            display: block;
+        .right_btn .logout p a {
+            border-bottom: 1px solid transparent !important;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        header {
-            background: rgba(10, 25, 47, 0.8);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(5px);
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header h1 {
-            font-size: 1.7rem;
-            margin: 0;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            color: #ccd6f6;
-        }
-
-        header h1 span {
-            color: #64ffda;
-
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li:first-child {
-            margin-left: 0;
-        }
-
-        nav ul li a {
-            font-size: 1.1rem;
-            font-weight: 500;
-            display: inline-block;
-            color: #ccd6f6;
-            position: relative;
-            transition: color 0.3s ease;
-            padding-bottom: 3px;
-
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 2px;
-            background-color: #64ffda;
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        nav ul li a:hover {
-            color: #4affd0;
-        }
-
-        .banner {
-            text-align: center;
-            padding: 5rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .banner::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(100, 255, 218, 0.1), transparent);
-            z-index: 1;
-
-        }
-
-        .banner::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(circle, rgba(100, 255, 218, 0.05), transparent 60%);
-            z-index: 1;
-
-        }
-
-        .banner .container {
-            position: relative;
-            z-index: 2;
-
-        }
-
-
-        .banner h2 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-
-        }
-
-        .banner p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #a8b2d1;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: transparent;
-            color: #64ffda;
-            border: 2px solid #64ffda;
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .btn:hover {
-            background-color: #64ffda;
-            color: #0a192f;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 3rem;
-            letter-spacing: 1px;
-        }
-
-        .timeline {
-            position: relative;
-            padding: 2rem 0;
-            margin-top: 5rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 2px;
-            margin-left: -1px;
-            background-color: #4a5568;
-            z-index: 0;
-
-        }
-
-        .clear {
-            clear: both;
-        }
-
-        .prizes {
-            padding: 5rem 0;
-        }
-
-        .prize-level {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .prize-level h3 {
-            font-size: 1.7rem;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-        }
-
-        .prize-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            width: 50%;
-            margin: auto;
-        }
-
-        .prize-item {
-            text-align: center;
-            padding: 2rem;
-            border: 1px solid #334756;
-            border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-        }
-
-        .prize-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-        }
-
-        .prize-item img {
-            width: 70px;
-            margin-bottom: 1rem;
-            position: absolute;
-        }
-
-        .prize-item h4 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .prize-item p {
-            font-size: 1rem;
-            color: #a8b2d1;
-        }
-
-        .organizers {
-            padding: 5rem 0;
-        }
-
-        .organizer-group {
-            margin-bottom: 3rem;
-            text-align: center;
-
-        }
-
-        .organizer-group h3 {
-            font-size: 1.7rem;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-        }
-
-        .organizer-logos {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .organizer-logos img {
-            max-width: 150px;
-            height: auto;
-            filter: grayscale(0%);
-
-        }
-
-        .organizer-logos img:hover {
-            filter: grayscale(0%);
-
-        }
-
-
-        .contact {
-            background-color: #112240;
-            padding: 5rem 0;
-            text-align: center;
-        }
-
-        .contact h3 {
-            font-size: 1.8rem;
-            font-weight: 500;
-            margin-bottom: 1.5rem;
-
-        }
-
-        .contact p {
-            margin-bottom: 1.5rem;
-            color: #a8b2d1;
-        }
-
-        footer {
-            text-align: center;
-            padding: 1rem 0;
-            font-size: 0.9rem;
-            color: #a8b2d1;
-        }
-
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 1.5rem;
-            }
-
-            header h1 {
-                font-size: 1.5rem;
-            }
-
-            nav ul li {
-                margin-left: 1rem;
-            }
-
-            nav ul li a {
-                font-size: 1rem;
-            }
-
-            .banner h2 {
-                font-size: 2.5rem;
-            }
-
-            .banner p {
-                font-size: 1.1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-                margin-bottom: 2rem;
-            }
-        }
-
-        .info-box {
-            border: 2px solid #4a5568;
-            /* 设置边框颜色和宽度 */
-            padding: 20px;
-            /* 内边距，使内容与边框之间有空间 */
-            background-color: #1e2a3a;
-            /* 背景颜色，可选 */
-            border-radius: 8px;
-            /* 边框圆角，可选 */
-            margin-top: 20px;
-            /* 上边距，与标题保持一定距离 */
-            margin-bottom: 20px;
-            /* 下边距，与后续内容保持一定距离 */
+        .right_btn .logout p{
+            top: 25px !important;
         }
     </style>
 </head>
-
 <body>
-    <header>
-        <div class="container">
-            <h1><span>獬豸杯</span>电子数据取证竞赛</h1>
-            <nav>
-                <ul>
-                    <li><a href="#">首页</a></li>
-                    <li><a href="#about">比赛介绍</a></li>
-                    <li><a href="#timeline">比赛时间</a></li>
-                    <li><a href="#prizes">奖项设置</a></li>
-                    <li><a href="#organizers">主办机构</a></li>
-                    <li><a href="#contact">联系方式</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <section class="banner">
-        <div class="container">
-            <img src="logo.png" style="display: block; margin: 0 auto; width: 300px; height: auto;">
-            <h2>第二届 <span>獬豸杯</span> 电子数据取证竞赛</h2>
-            <br>
-            <a href="https://2025.xzcup.cn" class="btn">立即报名</a>
-        </div>
-    </section>
-
-    <section id="about" class="container">
-        <h2 class="section-title">比赛介绍</h2>
-        <div class="prize-item">
-            <p>獬豸杯电子数据取证竞赛旨在提高电子数据取证从业人员的技能水平，促进电子数据取证技术创新，培养电子数据取证专业人才，推动电子数据取证事业发展。所有参赛人员须拥有中国国籍（不含港澳台地区）。<b>比赛形式为个人赛，参赛者需要自备工具</b></p>
-        </div>
-    </section>
-
-    <section id="timeline">
-        <h2 class="section-title">比赛时间</h2>
-        <div class="time-img">
-            <img src="time.png" style="display: block; margin: 0 auto;">
-        </div>
-    </section>
-
-
-    <section id="prizes" class="prizes container">
-        <h2 class="section-title">奖项设置</h2>
-        <div class="prize-level">
-            <div class="prize-grid">
-                <div class="prize-item">
-                    <img src="1.webp" alt="奖杯图标">
-                    <h4>一等奖</h4>
-                    <p>奖金：0元</p>
-                </div>
+    <div class="header_right pwidth">
+    </div>    
+	<div class="wrap bodier">
+        <!-- banner-->
+        <div class="banner" v-clock="">
+            <div class="banner_title">
+                
             </div>
+        <div class="banner_btn">
+	    <a href="https://2025.xzb.cn">立即报名</a>
         </div>
-        <div class="prize-level">
-            <div class="prize-grid">
-                <div class="prize-item">
-                    <img src="2.webp" alt="奖杯图标">
-                    <h4>二等奖</h4>
-                    <p>奖金：0元</p>
-                </div>
-            </div>
-        </div>
-        <div class="prize-level">
-            <div class="prize-grid">
-                <div class="prize-item">
-                    <img src="3.webp" alt="奖杯图标">
-                    <h4>三等奖</h4>
-                    <p>奖金：0元</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
+        <!-- 专题内容 -->
+        <div class="content">
+        <div class="match_pen" data-top="1">
+				<h1 class="tit_text" style="background-image: url(img/title_1.png)"></h1>
+				<ul class="pcwidth">
+					<p style="text-indent: 2em;width: 78%;margin-left: 11%;white-space: wrap;">“獬豸杯”电子数据取证竞赛是一项旨在提升电子数据取证领域专业水平、培养高素质人才的赛事。第二届赛事在总结首届经验的基础上，进一步优化赛制与赛题，为参赛者提供更具挑战性与实践价值的竞技平台，推动电子数据取证技术与应用的创新与发展。</p>
+				</ul>
+			</div>
 
-    <section id="organizers" class="organizers container">
-        <h2 class="section-title">主办机构</h2>
-        <div class="organizer-group">
-            <div class="organizer-logos">
-                <img src="zb/1.png" alt="主办单位1">
-                <img src="zb/2.png" alt="主办单位2">
-                <img src="zb/3.png" alt="主办单位3">
-            </div>
-        </div>
-    </section>
-    <section id="contact" class="contact">
-        <h2 class="section-title">联系方式</h2>
-        <div class="container">
-            <p>QQ一群：955391766</p>
-            <p>QQ二群：901185119</p>
-        </div>
-    </section>
-    <footer>
-        <p>&copy; 2025 獬豸杯电子数据取证竞赛</p>
-    </footer>
-    <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
+			<div data-top="2">
+				<h1 class="tit_text" style="background-image: url(img/title_2.png)"></h1>
+				<ul class="trips pcwidth" data-resizes="1" data-year="2022">
+					<i class="line_center"></i>
+					<li class="">
+						<h5>
+							<svg>
+								<defs>
+									<linearGradient id="linear_trip" x1="0%" y1="0%" x2="100%" y2="0%">
+										<stop offset="0%" stop-color="#37fafd" stop-opacity="1"></stop>
+										<stop offset="58%" stop-color="#00bdfc" stop-opacity="1"></stop>
+									</linearGradient>
+								</defs>
+								<text text-anchor="middle" x="50%" y="70%" fill="url(#linear_trip)">报名时间</text>
+							</svg>
+						</h5>
+						<i class="line_circle"><b>1</b></i>
+						<h6>
+                        13月32日-13月32日 18:00
+						</h6>
+					</li>
+					<li>
+						<h5 style="left: -9.8em;">
+							<svg>
+								<text text-anchor="middle" x="50%" y="70%" fill="url(#linear_trip)">比赛时间</text>
+							</svg>
+						</h5>
+						<i class="line_circle"><b>2</b></i>
+						<h6>
+						13月32日11:00-23:59
+						</h6>
+					</li>
+					<li>
+						<h5>
+							<svg>
+								<text text-anchor="middle" x="50%" y="70%" fill="url(#linear_trip)">比赛结果公布</text>
+							</svg>
+						</h5>
+						<i class="line_circle"><b>3</b></i>
+						<h6>
+						13月32日
+						</h6>
+					</li>
+				</ul>
+			</div>
 
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
-</body>
+			<div class="match_pen" data-top="3">
+				<h1 class="tit_text" style="background-image: url(img/title_3.png)"></h1>
+				<ul class="pcwidth">
+					<dd>面向具有中华人民共和国国籍的所有电子数据取证爱好者</dd>
+				</ul>
+			</div>
 
-</html>
+			<div class="award match_pen pcwidth" data-top="4">
+				<h1 class="tit_text" style="background-image: url(img/title_4.png)"></h1>
+				<dl>
+					<li class="active font_FZDHTJW" class-bg="group_1" class-bg-active="group_1_active" data-events="click_name" data-clickname="award_kid" data-eq="1">
+						<svg>
+							<defs>
+								<linearGradient id="linear_award" x1="0%" y1="0%" x2="0%" y2="100%">
+									<stop offset="0%" stop-color="#4afbfb" stop-opacity="1"></stop>
+									<stop offset="100%" stop-color="#28c6ff" stop-opacity="1"></stop>
+								</linearGradient>
+							</defs>
+							<text class="font_FZDHTJW" text-anchor="middle" x="50%" y="65%" fill="url(#linear_award)">电子取证</text>
+						</svg>
+					</li>
+					<ul>
+					</ul>
+				</dl>
+				<ol>
+					<li name="award_kid" data-eq="1">
+						<div name="award_kid_con" data-eq="1">
+							<h2>电子数据取证竞赛</h2>
+							<br>
+							<p>参赛方式：我也不知道
+							<br>比赛时间：我也不知道
+							<br>参与形式：我也不知道
+							<br>题目范围：我也不知道
+							<br>Writeup提交时间：我也不知道。</p>
+						</div>
+					</li>
+				</ol>
+			</div>
+
+			<div class="match_form match_pen pcwidth" data-top="5">
+				<h1 class="tit_text" style="background-image: url(img/title_5.png)"></h1>
+				<ul style="margin: -24px auto 0;">
+				</ul>
+				<ol>
+					<li class-bg="group_2_1">
+						<h3 class="font_FZDHTJW">一等奖</h3>
+						<h4 class="font_FZDHTJW">第1-300名</h4>
+						<h4 class="font_FZDHTJW">一巴掌</h4>
+					</li>
+					<li class-bg="group_2_2">
+						<h3 class="font_FZDHTJW">二等奖</h3>
+						<h4 class="font_FZDHTJW">第1-900名</h4>
+						<h4 class="font_FZDHTJW">一巴掌</h4>
+					</li>
+					<li class-bg="group_2_3">
+						<h3 class="font_FZDHTJW">三等奖</h3>
+						<h4 class="font_FZDHTJW">第1-1800名</h4>
+						<h4 class="font_FZDHTJW">一巴掌</h4>
+					</li>
+				</ol>
+			</div>
+
+			<div class="match_pen" data-top="6">
+				<h1 class="tit_text" style="background-image: url(img/title_6.png)"></h1>
+				<ul class="pcwidth" style="text-align:centre">
+					<dt>主办单位：主办1 | 主办2 | 主办3
+					<br>协办单位：协办1 | 协办2 | 协办3 | 协办4 | 协办5 | 协办6 
+					</dt>
+				</ul>
+			</div>
+
+			<div class="match_pen" data-top="7">
+				<h1 class="tit_text" style="background-image: url(img/title_7.png)"></h1>
+				<ul class="pcwidth">
+					<dd style="padding-bottom: 5px;">
+						<div class="img">
+							<div class="img_item">
+								<img src="data:image/png;base64,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" alt="" width="180px" height="180px">
+							</div>
+							</div>
+						</div>
+					</dd>
+				</ul>
+			</div>
+            <div class="b_footer" data-svg="footer">
+                <p>©2025 獬豸杯电子数据取证竞赛组委会</p>
+			</div>
+        </div>
+        <!-- 右侧楼梯导航 -->
+        <div class="fixside" data-resizes="2" data-scroll-body="" style="display: none">
+			<ul>
+            <li class-bg-before="group_3" class-bg-active-before="group_3_active" class="pointer" data-scroll="[data-top=1]"><span>比赛背景</span></li>
+				<li class-bg-before="group_3" class-bg-active-before="group_3_active" class="pointer" data-scroll="[data-top=2]"><span>赛程安排</span></li>
+				<li class-bg-before="group_3" class-bg-active-before="group_3_active" class="pointer" data-scroll="[data-top=3]"><span>参赛对象</span></li>
+				<li class-bg-before="group_3" class-bg-active-before="group_3_active" class="pointer" data-scroll="[data-top=4]"><span>比赛形式</span></li>
+				<li class-bg-before="group_3" class-bg-active-before="group_3_active" class="pointer" data-scroll="[data-top=5]"><span>奖项设置</span></li>
+				<li class-bg-before="group_3" class-bg-active-before="group_3_active" class="pointer" data-scroll="[data-top=6]"><span>组织机构</span></li>
+				<li class-bg-before="group_3" class-bg-active-before="group_3_active" class="pointer" data-scroll="[data-top=7]"><span>联系方式</span></li>
+				<li class-bg-before="group_3" class-bg-active-before="group_3_active" class="pointer" data-scroll="body"><span>返回顶部</span></li>
+			</ul>
+		</div>
+    </div>
+<script type="text/javascript" src="js/jquery1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jQuery.ajax.js"></script>
+<script type="text/javascript" src="js/polyfill.min.js"></script>
+<script type="text/javascript" src="js/vue2.6.js"></script>
+<script type="text/javascript" src="js/element-ui.js"></script>
+<script type="text/javascript" src="js/mix.js"></script>
+<script type="text/javascript" src="js/base.js"></script>
+<script type="text/javascript" src="js/login.js"></script>    <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript" src="js/signup.js"></script>
+<script type="text/javascript" src="js/2022.js"></script>
+<script type="text/javascript" src="js/2018.js"></script>
+
+</body></html>
